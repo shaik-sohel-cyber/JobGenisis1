@@ -1,0 +1,152 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 210 40% 98%;
+
+    --card: 0 0% 7%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 222 89% 54%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 215 16% 65%;
+
+    --accent: 0 100% 50%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 100% 50%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 210 40% 98%;
+
+    --card: 0 0% 7%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 0 100% 50%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-black/50 backdrop-blur-md border border-white/10 shadow-lg;
+  }
+  
+  .button-glow {
+    @apply relative overflow-hidden transition-all duration-300 
+           after:absolute after:inset-0 after:z-[-1] 
+           after:opacity-0 after:transition-opacity hover:after:opacity-100 
+           after:bg-gradient-to-r after:from-accent/70 after:to-accent/40 
+           after:animate-pulse-slow;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent to-accent/70;
+  }
+
+  /* Neon tab animation */
+  .neon-tab {
+    @apply relative transition-all duration-300;
+  }
+  
+  .neon-tab::before {
+    content: '';
+    @apply absolute -bottom-1 left-0 w-full h-[2px] bg-accent 
+           opacity-0 transition-all duration-300 
+           shadow-[0_0_5px_#ff0000,0_0_10px_#ff0000,0_0_15px_#ff0000];
+  }
+  
+  .neon-tab:hover::before,
+  .neon-tab[data-active="true"]::before {
+    @apply opacity-100;
+    animation: neon-pulse 1.5s infinite alternate;
+  }
+  
+  @keyframes neon-pulse {
+    0% {
+      opacity: 0.7;
+      box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000;
+    }
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+    }
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
